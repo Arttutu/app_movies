@@ -63,6 +63,7 @@ class Pesquisar extends SearchDelegate {
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     //pega o tamanho da query
+                    //pega o tamanho da query
                     itemCount: film?.results?.length,
                     itemBuilder: (context, index) {
                       var imageUrl = film?.results?[index].posterPath;
