@@ -34,7 +34,8 @@ class Cinemas extends StatelessWidget {
                                       cinemas[index]['backdrop_path'],
                                   poster: 'https://image.tmdb.org/t/p/w500' +
                                       cinemas[index]['poster_path'],
-                                  descricao: cinemas[index]['overview'],
+                                  descricao: cinemas[index]['overview'] ??
+                                      'Sem Descrição',
                                   nota: cinemas[index]['vote_average'],
                                   datalancamento: cinemas[index]
                                       ['release_date']))));

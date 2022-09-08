@@ -52,52 +52,50 @@ class Pesquisar extends SearchDelegate {
         if (snapshot.hasData) {
           MoviesAndSeriesModel? film = snapshot.data;
           return Container(
+              color: Colors.black,
               child: Column(
-            //ajustando posição do texto
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: sizeConfig.dynamicScaleSize(size: 600),
-                width: sizeConfig.dynamicScaleSize(size: 400),
-                padding: EdgeInsets.all(10),
-                child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    //pega o tamanho da query
-                    //pega o tamanho da query
-                    itemCount: film?.results?.length,
-                    itemBuilder: (context, index) {
-                      var imageUrl = film?.results?[index].posterPath;
-                      var texturl_serie = film?.results?[index].name;
-                      var texturl_filme = film?.results?[index].title;
+                //ajustando posição do texto
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: sizeConfig.dynamicScaleSize(size: 600),
+                    width: sizeConfig.dynamicScaleSize(size: 600),
+                    padding: EdgeInsets.all(10),
+                    child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        //pega o tamanho da query
+                        //pega o tamanho da query
+                        itemCount: film?.results?.length,
+                        itemBuilder: (context, index) {
+                          var imageUrl = film?.results?[index].posterPath;
+                          var texturl_serie = film?.results?[index].name;
+                          var texturl_filme = film?.results?[index].title;
 
-                      return Column(
-                        children: [
-                          Row(
+                          return Column(
                             children: [
-                              imageUrl != null
-                                  ? InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: ((context) =>
-                                                    Descricao(
+                              Row(
+                                children: [
+                                  imageUrl != null && imageUrl != ''
+                                      ? InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: ((context) => Descricao(
                                                         name: film
                                                                 ?.results?[
                                                                     index]
                                                                 .title ??
                                                             '',
-                                                        banner: film
-                                                            ?.results?[index]
-                                                            .backdropPath,
-                                                        poster: film
-                                                            ?.results?[index].posterPath,
-                                                        ,
+                                                        banner:
+                                                            'https://image.tmdb.org/t/p/w500${film?.results?[index].backdropPath}',
+                                                        poster:
+                                                            'https://image.tmdb.org/t/p/w500${film?.results?[index].posterPath}',
                                                         descricao: film
                                                                 ?.results?[
                                                                     index]
                                                                 .overview ??
-                                                            '',
+                                                            'Sem Descrição',
                                                         nota: film
                                                             ?.results?[index]
                                                             .voteAverage,
@@ -105,55 +103,55 @@ class Pesquisar extends SearchDelegate {
                                                                 ?.results?[
                                                                     index]
                                                                 .releaseDate ??
-                                                            ''))));
-                                      },
+                                                            'Sem data de lançamento'))));
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            height: 300,
+                                            width: 200,
+                                            child: imageUrl == null
+                                                ? Container()
+                                                : Image(
+                                                    fit: BoxFit.cover,
+                                                    image: NetworkImage(
+                                                        'https://image.tmdb.org/t/p/original/$imageUrl')),
+                                          ),
+                                        )
+                                      : Container(),
+                                  Visibility(
+                                    visible: texturl_filme != null,
+                                    child: Flexible(
                                       child: Container(
-                                        padding: EdgeInsets.all(10),
-                                        height: 300,
-                                        width: 200,
-                                        child: imageUrl == null
+                                        child: texturl_filme == null
                                             ? Container()
-                                            : Image(
-                                                fit: BoxFit.cover,
-                                                image: NetworkImage(
-                                                    'https://image.tmdb.org/t/p/original/$imageUrl')),
+                                            : ModificadorTexto(
+                                                color: Colors.white,
+                                                size: 20,
+                                                text: texturl_filme),
                                       ),
-                                    )
-                                  : Container(),
-                              Visibility(
-                                visible: texturl_filme != null,
-                                child: Flexible(
-                                  child: Container(
-                                    child: texturl_filme == null
-                                        ? Container()
-                                        : ModificadorTexto(
-                                            color: Colors.white,
-                                            size: 20,
-                                            text: texturl_filme),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: texturl_serie != null,
-                                child: Flexible(
-                                  child: Container(
-                                    child: texturl_serie == null
-                                        ? Container()
-                                        : ModificadorTexto(
-                                            color: Colors.white,
-                                            size: 20,
-                                            text: texturl_serie),
+                                  Visibility(
+                                    visible: texturl_serie != null,
+                                    child: Flexible(
+                                      child: Container(
+                                        child: texturl_serie == null
+                                            ? Container()
+                                            : ModificadorTexto(
+                                                color: Colors.white,
+                                                size: 20,
+                                                text: texturl_serie),
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
                             ],
-                          ),
-                        ],
-                      );
-                    }),
-              ),
-            ],
-          ));
+                          );
+                        }),
+                  ),
+                ],
+              ));
         } else if (snapshot.hasError) {
           return const Center(child: Icon(Icons.refresh));
         }
@@ -176,8 +174,6 @@ class Pesquisar extends SearchDelegate {
       ),
     );
   }
-
-  inkWel() {}
 }
 
 class PosterRequest {

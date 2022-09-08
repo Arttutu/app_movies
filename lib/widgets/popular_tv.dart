@@ -15,7 +15,7 @@ class ListaPopulares extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const ModificadorTexto(
-              text: 'Filmes Populares', color: Colors.white, size: 26),
+              text: 'Séries em alta', color: Colors.white, size: 26),
           Container(
             height: 220,
 ////////////////builder
@@ -29,7 +29,7 @@ class ListaPopulares extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: ((context) => Descricao(
-                                  name: popular[index]['title'],
+                                  name: popular[index]['name'],
                                   banner: 'https://image.tmdb.org/t/p/w500' +
                                       popular[index]['backdrop_path'],
                                   poster: 'https://image.tmdb.org/t/p/w500' +
@@ -39,7 +39,7 @@ class ListaPopulares extends StatelessWidget {
                                       : 'Falha ao carregar',
                                   nota: popular[index]['vote_average'],
                                   datalancamento: popular[index]
-                                      ['release_date']))));
+                                      ['first_air_date']))));
                     },
                     child: Container(
                       //margem entre os banner
@@ -69,8 +69,8 @@ class ListaPopulares extends StatelessWidget {
                             child: ModificadorTexto(
                                 size: 20,
                                 color: Colors.white,
-                                text: popular[index]['title'] != null
-                                    ? popular[index]['title']
+                                text: popular[index]['name'] != null
+                                    ? popular[index]['name']
                                     : 'loanding'),
                           ),
                         ],

@@ -3,7 +3,7 @@ import 'package:meuapp/utils/text.dart';
 
 class Descricao extends StatelessWidget {
   final String name, descricao, banner, poster, datalancamento;
-  final double nota;
+  final dynamic nota;
 
   const Descricao(
       {super.key,

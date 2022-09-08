@@ -1,9 +1,7 @@
 import 'package:meuapp/utils/shearbar.dart';
-import 'package:meuapp/widgets/descricao.dart';
-
 import 'api_cofing/variaveis_constantes.dart';
 import 'utils/text.dart';
-import 'widgets/Popular_Movies.dart';
+import 'widgets/popular_tv.dart';
 import '../widgets/Em_Breve.dart';
 import '../widgets/Nos_Cinemas.dart';
 import 'package:flutter/material.dart';
@@ -31,26 +29,22 @@ class HomePageSatate extends State<HomePage> {
     TMDB pegandoresposta = TMDB(ApiKeys(key, token), defaultLanguage: 'pt-BR');
 
     LogConfig:
-    ConfigLogger(showErrorLogs: true, showLogs: true);
+    const ConfigLogger(showErrorLogs: true, showLogs: true);
 
     //Acessando os dados da api  através de Chave e valor {key, valor}
-    Map popularmoviesresults = await pegandoresposta.v3.movies.getPopular();
+
     Map embrevemoviesresults = await pegandoresposta.v3.movies.getUpcoming();
     Map noscinemasresults = await pegandoresposta.v3.movies.getNowPlaying();
     Map popularseriesresults = await pegandoresposta.v3.tv.getPopular();
-    Map passandoagoraserieresults = await pegandoresposta.v3.tv.getOnTheAir();
+
     //SetState Informa que o estado da aplicação mudou.
 
     setState(() {
       nosCinemas = noscinemasresults['results'];
-      popularMovies = popularmoviesresults['results'];
       emBreveMovies = embrevemoviesresults['results'];
-      popularseries = passandoagoraserieresults['results'];
-      passandoagoraserie = passandoagoraserieresults['results'];
+      popularseries = popularseriesresults['results'];
     });
   }
-
-  Pesquisar()
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +74,7 @@ class HomePageSatate extends State<HomePage> {
 
       body: ListView(
         children: [
-          ListaPopulares(popular: popularMovies),
+          ListaPopulares(popular: popularseries),
           EmBreve(breve: emBreveMovies),
           Cinemas(cinemas: nosCinemas),
         ],
