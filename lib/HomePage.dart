@@ -20,11 +20,11 @@ class HomePageSatate extends State<HomePage> {
 
   @override
   void initState() {
-    carregarFilmes();
+    carregarFilmes;
     super.initState();
   }
 
-  carregarFilmes() async {
+  get carregarFilmes async {
     // instanciando o objeto TMDB , passando sua chave e seu token de acesso.
     TMDB pegandoresposta = TMDB(ApiKeys(key, token), defaultLanguage: 'pt-BR');
 
@@ -52,11 +52,14 @@ class HomePageSatate extends State<HomePage> {
       backgroundColor: Colors.black,
       //AppBar Cabeçalho.
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.transparent,
         title: const ModificadorTexto(
-            text: 'Seus filmes e séries favoritos ❤️',
-            color: Colors.white,
-            size: 25),
+            text: 'ArtFlix ❤️', color: Colors.white, size: 25),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(0),
+          child: Text('Seus filmes e séries favoritos estão aqui.'),
+        ),
         actions: [
           IconButton(
               onPressed: () {
@@ -69,7 +72,7 @@ class HomePageSatate extends State<HomePage> {
         ],
       ),
 
-      //Corpo do aplicativo
+      //Corpo da homepage
       //Listview mostra os intens da lista.
 
       body: ListView(

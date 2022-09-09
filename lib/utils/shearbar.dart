@@ -1,10 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:meuapp/api_cofing/variaveis_constantes.dart';
 import 'package:meuapp/utils/size_config.dart';
 import 'package:meuapp/utils/text.dart';
-import '../api_cofing/variaveis_constantes.dart';
-import "package:http/http.dart" as http;
+import '../api_cofing/chamada_api.dart';
 import '../widgets/descricao.dart';
 import '../models/movies_and_series.model.dart';
 
@@ -13,8 +11,8 @@ class Pesquisar extends SearchDelegate {
   @override
   //Sugestão para o usuário pesquisar.
   String get searchFieldLabel => ' Pesquisar';
+  @override
   List<Widget>? buildActions(BuildContext context) {
-    //
     return [
       IconButton(
         onPressed: () {
@@ -41,13 +39,12 @@ class Pesquisar extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    //////////////////////////////////////////////////////////////////////////
+    // instanciando as classes
     final sizeConfig = SizeConfig(mediaQueryData: MediaQuery.of(context));
-    final PosterRequest _posterRequest = PosterRequest();
-    //////////////////////////////////////////////////////////////
+    final PosterRequest posterRequest = PosterRequest();
 
     return FutureBuilder<MoviesAndSeriesModel>(
-      future: _posterRequest.getSearchMoviesAndSeries(query),
+      future: posterRequest.getSearchMoviesAndSeries(query),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           MoviesAndSeriesModel? film = snapshot.data;
@@ -60,24 +57,29 @@ class Pesquisar extends SearchDelegate {
                   Container(
                     height: sizeConfig.dynamicScaleSize(size: 600),
                     width: sizeConfig.dynamicScaleSize(size: 600),
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: ListView.builder(
                         scrollDirection: Axis.vertical,
                         //pega o tamanho da query
                         //pega o tamanho da query
                         itemCount: film?.results?.length,
                         itemBuilder: (context, index) {
+                          var pessoaurl = film?.results?[index].mediaType;
                           var imageUrl = film?.results?[index].posterPath;
-                          var texturl_serie = film?.results?[index].name;
-                          var texturl_filme = film?.results?[index].title;
+                          var texturlSerie = film?.results?[index].name;
+                          var texturlFilme = film?.results?[index].title;
 
                           return Column(
                             children: [
                               Row(
                                 children: [
-                                  imageUrl != null && imageUrl != ''
+                                  //ternário para verificar se a imagem é null se for nula retorna um Conteiner vazio.
+                                  imageUrl != null
+                                      // Inkel Splash efeito quando vc clica em um objeto na tela
                                       ? InkWell(
+                                          //OnTap permite o usuário clicar no objeto
                                           onTap: () {
+                                            //troca de página
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
@@ -86,11 +88,17 @@ class Pesquisar extends SearchDelegate {
                                                                 ?.results?[
                                                                     index]
                                                                 .title ??
-                                                            '',
-                                                        banner:
-                                                            'https://image.tmdb.org/t/p/w500${film?.results?[index].backdropPath}',
-                                                        poster:
-                                                            'https://image.tmdb.org/t/p/w500${film?.results?[index].posterPath}',
+                                                            'Sem titulo',
+                                                        banner: urlimage +
+                                                            film
+                                                                ?.results?[
+                                                                    index]
+                                                                .backdropPath,
+                                                        poster: urlimage +
+                                                            film
+                                                                ?.results?[
+                                                                    index]
+                                                                .posterPath,
                                                         descricao: film
                                                                 ?.results?[
                                                                     index]
@@ -100,13 +108,12 @@ class Pesquisar extends SearchDelegate {
                                                             ?.results?[index]
                                                             .voteAverage,
                                                         datalancamento: film
-                                                                ?.results?[
-                                                                    index]
+                                                                ?.results?[index]
                                                                 .releaseDate ??
                                                             'Sem data de lançamento'))));
                                           },
                                           child: Container(
-                                            padding: EdgeInsets.all(10),
+                                            padding: const EdgeInsets.all(10),
                                             height: 300,
                                             width: 200,
                                             child: imageUrl == null
@@ -118,29 +125,32 @@ class Pesquisar extends SearchDelegate {
                                           ),
                                         )
                                       : Container(),
+                                  //visibility faz a seleção do nome da serie e do filme. não mostrando quando for nulo.
                                   Visibility(
-                                    visible: texturl_filme != null,
+                                    visible: texturlFilme != null,
                                     child: Flexible(
                                       child: Container(
-                                        child: texturl_filme == null
+                                        child: texturlFilme == null
                                             ? Container()
                                             : ModificadorTexto(
                                                 color: Colors.white,
                                                 size: 20,
-                                                text: texturl_filme),
+                                                text: texturlFilme),
                                       ),
                                     ),
                                   ),
                                   Visibility(
-                                    visible: texturl_serie != null,
+                                    visible: texturlSerie != null &&
+                                        pessoaurl == 'tv',
+                                    //Flexible adapta o texto com a imagem
                                     child: Flexible(
                                       child: Container(
-                                        child: texturl_serie == null
+                                        child: texturlSerie == null
                                             ? Container()
                                             : ModificadorTexto(
                                                 color: Colors.white,
                                                 size: 20,
-                                                text: texturl_serie),
+                                                text: texturlSerie),
                                       ),
                                     ),
                                   ),
@@ -155,9 +165,10 @@ class Pesquisar extends SearchDelegate {
         } else if (snapshot.hasError) {
           return const Center(child: Icon(Icons.refresh));
         }
+        //animação de loading na tela de busca.
         return const Center(
           child: CircularProgressIndicator(
-            strokeWidth: 5,
+            strokeWidth: 10,
           ),
         );
       },
@@ -173,27 +184,5 @@ class Pesquisar extends SearchDelegate {
             style: TextStyle(color: Colors.white, fontSize: 20)),
       ),
     );
-  }
-}
-
-class PosterRequest {
-  dynamic response;
-  Future<MoviesAndSeriesModel> getSearchMoviesAndSeries(String query) async {
-    try {
-      response = await http
-          .get(Uri.parse('$url/3/search/multi?api_key=$key&query=$query'));
-
-      if (query != '') {
-        if (response.statusCode == 200 && query != '') {
-          return MoviesAndSeriesModel.fromJson(jsonDecode(response.body));
-        } else {
-          throw Exception('Failed to load album');
-        }
-      }
-      return MoviesAndSeriesModel.fromJson(jsonDecode(response.body));
-    } on Exception catch (e) {
-      print('não foi possivel obter o fazer a pesquisa $e');
-      rethrow;
-    }
   }
 }
