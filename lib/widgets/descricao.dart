@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meuapp/utils/text.dart';
+import '../utils/text.dart';
 
 class Descricao extends StatelessWidget {
   final String name, descricao, banner, poster, datalancamento;
@@ -81,7 +82,7 @@ class Descricao extends StatelessWidget {
                   child: Container(
                     child: ModificadorTexto(
                       text: descricao,
-                      size: 18,
+                      size: 22,
                       color: Colors.white,
                     ),
                   ),

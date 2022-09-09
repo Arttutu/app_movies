@@ -15,8 +15,8 @@ class Cinemas extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const ModificadorTexto(
-              text: 'Nos cinemas', color: Colors.white, size: 26),
-          Container(
+              text: 'Nos cinemas 🎬', color: Colors.white, size: 26),
+          SizedBox(
             height: 220,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -61,7 +61,7 @@ class Cinemas extends StatelessWidget {
                             ),
                           ),
                           //ajustando o titulo do banner
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Container(

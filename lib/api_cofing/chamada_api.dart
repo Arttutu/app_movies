@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'package:tmdb_api/tmdb_api.dart';
-
 import '../models/movies_and_series.model.dart';
 import 'variaveis_constantes.dart';
 import "package:http/http.dart" as http;
@@ -21,6 +19,7 @@ class PosterRequest {
       }
       return MoviesAndSeriesModel.fromJson(jsonDecode(response.body));
     } on Exception catch (e) {
+      // ignore: avoid_print
       print('não foi possivel obter o fazer a pesquisa $e');
       rethrow;
     }

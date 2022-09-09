@@ -1,16 +1,26 @@
-# app_filmes
+# Aplicativo de filmes
 
-A new Flutter project.
+Meu primeiro projeto em flutter. Um catálogo de filmes e séries a partir da API do TMDB
 
-## Getting Started
+### Ferramentas utilizadas
+<ul>
+ <li> Flutter 3.0.5</li>
+ <li> Dart 2.17.6</li>
+ <li>Visual Studio Code com os seguintes plugins: Flutter e Dart</li>
+ <li> Android SDK</li>
+ <li> Postman para converter os arquivos json para dart</li>
+<ul>
 
-This project is a starting point for a Flutter application.
+## referências
 
-A few resources to get you started if this is your first Flutter project:
+Esse projeto foi desenvolvido com as seguintes referências
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Documentação oficial](https://docs.flutter.dev/)
+- [Consumo de API's](https://flutter.dev/docs/get-started/install)
+- [tutorial flutter](https://www.youtube.com/watch?v=1ukSR1GRtMU&list=PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Pritns do aplicativo
+
+<img src ="C:\projects flutter\app_filmes\lib\assets\Screenshot_1662690080.png">
+<img src ="C:\projects flutter\app_filmes\lib\assets\Screenshot_1662690105.png">
+<img src ="C:\projects flutter\app_filmes\lib\assets\Screenshot_1662690203.png">

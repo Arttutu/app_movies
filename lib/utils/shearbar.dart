@@ -65,7 +65,8 @@ class Pesquisar extends SearchDelegate {
                         itemCount: film?.results?.length,
                         itemBuilder: (context, index) {
                           var pessoaurl = film?.results?[index].mediaType;
-                          var imageUrl = film?.results?[index].posterPath;
+                          var posterUrl = film?.results?[index].posterPath;
+                          var bannerUrl = film?.results?[index].backdropPath;
                           var texturlSerie = film?.results?[index].name;
                           var texturlFilme = film?.results?[index].title;
 
@@ -74,7 +75,7 @@ class Pesquisar extends SearchDelegate {
                               Row(
                                 children: [
                                   //ternário para verificar se a imagem é null se for nula retorna um Conteiner vazio.
-                                  imageUrl != null
+                                  posterUrl != null && bannerUrl != null
                                       // Inkel Splash efeito quando vc clica em um objeto na tela
                                       ? InkWell(
                                           //OnTap permite o usuário clicar no objeto
@@ -116,44 +117,50 @@ class Pesquisar extends SearchDelegate {
                                             padding: const EdgeInsets.all(10),
                                             height: 300,
                                             width: 200,
-                                            child: imageUrl == null
+                                            child: posterUrl == null
                                                 ? Container()
                                                 : Image(
                                                     fit: BoxFit.cover,
                                                     image: NetworkImage(
-                                                        'https://image.tmdb.org/t/p/original/$imageUrl')),
+                                                        'https://image.tmdb.org/t/p/original/$posterUrl')),
                                           ),
                                         )
                                       : Container(),
-                                  //visibility faz a seleção do nome da serie e do filme. não mostrando quando for nulo.
-                                  Visibility(
-                                    visible: texturlFilme != null,
-                                    child: Flexible(
-                                      child: Container(
-                                        child: texturlFilme == null
-                                            ? Container()
-                                            : ModificadorTexto(
-                                                color: Colors.white,
-                                                size: 20,
-                                                text: texturlFilme),
-                                      ),
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: texturlSerie != null &&
-                                        pessoaurl == 'tv',
-                                    //Flexible adapta o texto com a imagem
-                                    child: Flexible(
-                                      child: Container(
-                                        child: texturlSerie == null
-                                            ? Container()
-                                            : ModificadorTexto(
-                                                color: Colors.white,
-                                                size: 20,
-                                                text: texturlSerie),
-                                      ),
-                                    ),
-                                  ),
+                                  posterUrl != null
+                                      ?
+                                      //visibility faz a seleção do nome da serie e do filme. não mostrando quando for nulo.
+                                      Visibility(
+                                          visible: texturlFilme != null &&
+                                              pessoaurl != 'person',
+                                          child: Flexible(
+                                            child: Container(
+                                              child: texturlFilme == null
+                                                  ? Container()
+                                                  : ModificadorTexto(
+                                                      color: Colors.white,
+                                                      size: 20,
+                                                      text: texturlFilme),
+                                            ),
+                                          ),
+                                        )
+                                      : Container(),
+                                  posterUrl != null
+                                      ? Visibility(
+                                          visible: texturlSerie != null &&
+                                              pessoaurl != 'person',
+                                          //Flexible adapta o texto com a imagem
+                                          child: Flexible(
+                                            child: Container(
+                                              child: texturlSerie == null
+                                                  ? Container()
+                                                  : ModificadorTexto(
+                                                      color: Colors.white,
+                                                      size: 20,
+                                                      text: texturlSerie),
+                                            ),
+                                          ),
+                                        )
+                                      : Container(),
                                 ],
                               ),
                             ],

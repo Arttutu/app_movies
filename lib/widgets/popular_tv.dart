@@ -15,15 +15,18 @@ class ListaPopulares extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const ModificadorTexto(
-              text: 'Séries em alta', color: Colors.white, size: 26),
+              text: 'Séries em alta 🔥', color: Colors.white, size: 26),
           Container(
             height: 220,
-////////////////builder
+            //ListView builder para fazer a lista pegando os paramentros da API
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
+                //.lenght pega o tamanho da lista
                 itemCount: popular.length,
+                //Contruido a lista
                 itemBuilder: (context, index) {
                   return InkWell(
+                    //OnTap permite o usuário clicar no objeto
                     onTap: () {
                       Navigator.push(
                           context,
@@ -43,7 +46,7 @@ class ListaPopulares extends StatelessWidget {
                     },
                     child: Container(
                       //margem entre os banner
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       //Largura total
                       width: 250,
                       child: Column(
@@ -62,7 +65,7 @@ class ListaPopulares extends StatelessWidget {
                             ),
                           ),
                           //ajustando o titulo do banner
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Container(

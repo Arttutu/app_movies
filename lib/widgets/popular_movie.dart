@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'descricao.dart';
 import '../utils/text.dart';
 
-class EmBreve extends StatelessWidget {
+class Popularfilmes extends StatelessWidget {
   //Construtor quando a classe é chamada, ele atribui os valores iniciais
-  const EmBreve({Key? key, required this.breve}) : super(key: key);
+  const Popularfilmes({Key? key, required this.breve}) : super(key: key);
   final List breve;
 
   @override
@@ -15,7 +15,7 @@ class EmBreve extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const ModificadorTexto(
-              text: 'Em breve ', color: Colors.white, size: 26),
+              text: 'Filmes em alta 🔥', color: Colors.white, size: 26),
           Container(
             height: 220,
             child: ListView.builder(
