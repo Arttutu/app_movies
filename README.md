@@ -20,6 +20,6 @@ Esse projeto foi desenvolvido com as seguintes referências
 - [tutorial flutter](https://www.youtube.com/watch?v=1ukSR1GRtMU&list=PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ)
 
 ### Pritns do aplicativo
-<img src = "https://user-images.githubusercontent.com/49344472/189260555-643c50ff-d056-4ee7-bbe1-ee26bbf82a97.png" height="400" width="400">
-<img src = "https://user-images.githubusercontent.com/49344472/189260570-b0f44f7d-0bdc-4601-bba0-5f36cf63df2c.png" height="400" width="400">
-<img src = "https://user-images.githubusercontent.com/49344472/189260571-7199e9b7-429a-476a-bfe3-c20c5826a11b.png?w=10" height="400" width="400">
+<img src = "https://user-images.githubusercontent.com/49344472/189260555-643c50ff-d056-4ee7-bbe1-ee26bbf82a97.png" height="400" width="300">
+<img src = "https://user-images.githubusercontent.com/49344472/189260570-b0f44f7d-0bdc-4601-bba0-5f36cf63df2c.png" height="400" width="300">
+<img src = "https://user-images.githubusercontent.com/49344472/189260571-7199e9b7-429a-476a-bfe3-c20c5826a11b.png?w=10" height="400" width="300">
