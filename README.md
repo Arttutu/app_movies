@@ -11,7 +11,7 @@ Meu primeiro projeto em flutter. Um catálogo de filmes e séries a partir da AP
  <li> Postman para converter os arquivos json para dart</li>
 <ul>
 
-## referências
+### referências
 
 Esse projeto foi desenvolvido com as seguintes referências
 
@@ -20,7 +20,7 @@ Esse projeto foi desenvolvido com as seguintes referências
 - [tutorial flutter](https://www.youtube.com/watch?v=1ukSR1GRtMU&list=PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ)
 
 ### Pritns do aplicativo
-
+![](C:\projects flutter\app_filmes\lib\assets\Screenshot_1662690080.png)
 <img src ="C:\projects flutter\app_filmes\lib\assets\Screenshot_1662690080.png">
 <img src ="C:\projects flutter\app_filmes\lib\assets\Screenshot_1662690105.png">
 <img src ="C:\projects flutter\app_filmes\lib\assets\Screenshot_1662690203.png">
