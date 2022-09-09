@@ -75,6 +75,7 @@ class Pesquisar extends SearchDelegate {
                               Row(
                                 children: [
                                   //ternário para verificar se a imagem é null se for nula retorna um Conteiner vazio.
+
                                   posterUrl != null && bannerUrl != null
                                       // Inkel Splash efeito quando vc clica em um objeto na tela
                                       ? InkWell(
@@ -126,12 +127,11 @@ class Pesquisar extends SearchDelegate {
                                           ),
                                         )
                                       : Container(),
-                                  posterUrl != null
-                                      ?
-                                      //visibility faz a seleção do nome da serie e do filme. não mostrando quando for nulo.
-                                      Visibility(
-                                          visible: texturlFilme != null &&
-                                              pessoaurl != 'person',
+
+                                  //visibility faz a seleção do nome da serie e do filme. não mostrando quando for nulo.
+                                  posterUrl != null && bannerUrl != null
+                                      ? Visibility(
+                                          visible: texturlFilme != null,
                                           child: Flexible(
                                             child: Container(
                                               child: texturlFilme == null
@@ -144,10 +144,9 @@ class Pesquisar extends SearchDelegate {
                                           ),
                                         )
                                       : Container(),
-                                  posterUrl != null
+                                  posterUrl != null && bannerUrl != null
                                       ? Visibility(
-                                          visible: texturlSerie != null &&
-                                              pessoaurl != 'person',
+                                          visible: texturlSerie != null,
                                           //Flexible adapta o texto com a imagem
                                           child: Flexible(
                                             child: Container(

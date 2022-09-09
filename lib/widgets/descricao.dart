@@ -17,16 +17,13 @@ class Descricao extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ////////////////////////////////////////////
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
         child: ListView(
           children: [
             Container(
-              //Alutura
               height: 250,
-              ////////////////////////////////
               child: Stack(
                 // posicionamento do poster do banneer
                 children: [
@@ -54,7 +51,6 @@ class Descricao extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            //////////////////////////////////////////////////////////////
             Container(
               padding: EdgeInsets.all(10),
               child: ModificadorTexto(
@@ -68,7 +64,6 @@ class Descricao extends StatelessWidget {
                     text: 'Data de lançamento - ' + datalancamento,
                     size: 23,
                     color: Colors.white)),
-            //////////////////////////////////////////////////////////////
             Row(
               children: [
                 Container(
@@ -77,7 +72,6 @@ class Descricao extends StatelessWidget {
                   width: 100,
                   child: Image.network(poster),
                 ),
-                //////////////////////////////////////////////////////////////
                 Flexible(
                   child: Container(
                     child: ModificadorTexto(
