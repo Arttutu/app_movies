@@ -69,6 +69,20 @@ class Pesquisar extends SearchDelegate {
                           var bannerUrl = film?.results?[index].backdropPath;
                           var texturlSerie = film?.results?[index].name;
                           var texturlFilme = film?.results?[index].title;
+                          
+                          @override
+                          void compareTo(){
+                            
+                              if(texturlFilme != null && texturlSerie != null){
+                                
+                                 film?.results?.sort((a,b) => a.name.toString().compareTo(b.name.toString());
+
+                              }else{
+                               Conteiner(); 
+                              }
+                                                     
+                          }
+                                                   
 
                           return Column(
                             children: [
